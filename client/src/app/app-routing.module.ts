@@ -11,7 +11,8 @@ export const routes: Routes = [
   },
 
   {
-    path: "pages",
+    path: "dashboard",
+    canActivate: [AutherizationGuard],
     loadChildren: () =>
       import("./profile/pages.module").then((m) => m.PagesModule),
   },
@@ -44,10 +45,10 @@ export const routes: Routes = [
       //   path: 'messaging',
       //   loadChildren: () => import('./modules/messaging/messaging.module').then(m => m.MessagingModule),
       // },
-      // {
-      //   path: 'save',
-      //   loadChildren: () => import('./modules/saved-items/saved-items.module').then(m => m.SavedItemsModule),
-      // },
+      {
+        path: 'save',
+        loadChildren: () => import('./modules/saved-items/saved-items.module').then(m => m.SavedItemsModule),
+      },
       // {
       //   path: 'document-type',
       //   loadChildren: () => import('./modules/document-type/document-type.module').then(m => m.DocumentTypeModule),

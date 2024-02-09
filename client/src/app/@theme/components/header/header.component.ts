@@ -123,7 +123,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   showDashboard(){
-    this.router.navigate(['auth/login'])
+    this.router.navigate(['dashboard'])
   }
 
   logoutUser() {

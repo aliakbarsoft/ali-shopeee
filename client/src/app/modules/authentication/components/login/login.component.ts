@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       .login(this.loginForm.value)
       .subscribe((result: LoginResultDTO) => {
         if (result.access_token) {
-          this.router.navigate(["/pages"]);
+          this.router.navigate(["/dashboard"]);
           this.toastr.success(
             "ورود شما با موفقیت انجام شد",
             `${result.user.firstName + " " + result.user.lastName}`

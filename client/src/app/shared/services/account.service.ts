@@ -55,7 +55,6 @@ export class AccountService {
   }
 
   login(model: LoginDTO): Observable<LoginResultDTO> {
-    debugger;
     return this.http
       .post<LoginResultDTO>(this.apiAddress + "/login", model)
       .pipe(

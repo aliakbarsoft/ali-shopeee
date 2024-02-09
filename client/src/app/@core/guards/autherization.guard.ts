@@ -23,7 +23,6 @@ export class AutherizationGuard implements CanActivate {
     | boolean
     | UrlTree {
 
-      debugger;
     if (this.accountService.isLoggedIn()) {
       return true;
     } else {

@@ -7,9 +7,9 @@
 // @import 'tailwindcss/utilities';
 @font-face {
   font-family: "Iranyekan";
-  src: url("./assets/fonts/IRANYeka Thin.woff2") format("woff2"),
-    url("./assets/fonts/IRANYekan Thin.woff") format("woff"),
-    url("./assets/fonts/IRANYekan Thin.ttf") format("truetype");
+  src: url("./assets/fonts/iranYekan/Qs_Iranyekan\ bold.ttf") format("woff2"),
+    url("./assets/fonts/iranYekan/Qs_Iranyekan\ light.ttf") format("woff"),
+    url("./assets/fonts/iranYekan/Qs_Iranyekan.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -20,7 +20,6 @@ textarea::placeholder,
 input::placeholder {
   font-family: "Iranyekan", sans-serif !important;
 }
-
 
 :host-context(.nb-theme-cosmic) nb-menu {
   direction: rtl;
