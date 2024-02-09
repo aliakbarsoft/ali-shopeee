@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { PROFILE_MENU_ITEMS } from "../../pages/pages-menu";
+import { PROFILE_MENU_ITEMS } from "../../profile/pages-menu";
 
 @Component({
   selector: "ali-home",

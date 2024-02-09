@@ -122,6 +122,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  showProfile(){
+    this.router.navigate(['auth/profile'])
+  }
+
+  showDashboard(){
+    this.router.navigate(['auth/login'])
+  }
+
   logoutUser() {
     this.router.navigate(["auth/login"]);
   }
