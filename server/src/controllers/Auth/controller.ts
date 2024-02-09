@@ -8,7 +8,7 @@ require("dotenv").config;
 
 // sign-up
 routes.post(
-  "/auth/sign-up",
+  "/account/register",
   asyncHandler(async function signUp(req: Request, res: Response) {
     const formData = req.body;
     const data = await AuthService.signUp(formData);
@@ -20,7 +20,7 @@ routes.post(
 
 // sign-in
 routes.post(
-  "/auth/sign-in",
+  "/account/login",
   asyncHandler(async function signIn(req: Request, res: Response) {
     const formData = req.body;
     // if (formData.email && !formData.email) formData.email = formData.email;

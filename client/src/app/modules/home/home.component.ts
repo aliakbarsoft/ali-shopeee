@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { PROFILE_MENU_ITEMS } from "../../profile/pages-menu";
+import { DASHBOARD_MENU_ITEMS } from "../../profile/pages-menu";
 
 @Component({
   selector: "ali-home",
@@ -10,7 +10,7 @@ import { PROFILE_MENU_ITEMS } from "../../profile/pages-menu";
   </ngx-one-column-layout>`,
 })
 export class HomeComponent {
-  menu = PROFILE_MENU_ITEMS;
+  menu = DASHBOARD_MENU_ITEMS;
 
   constructor() {}
 }

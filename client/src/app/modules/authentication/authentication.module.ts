@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ThemeModule } from "../../@theme/theme.module";
 import { LoginComponent } from "./components/login/login.component";
 import { ConfirmPasswordComponent } from "./components/confirm-password/confirm-password.component";
+import { AccountService } from "../../shared/services/account.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ConfirmPasswordComponent } from "./components/confirm-password/confirm-
     RequestPasswordComponent,
     ResetPasswordComponent,
     LoginComponent,
-    ConfirmPasswordComponent
+    ConfirmPasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -27,5 +28,6 @@ import { ConfirmPasswordComponent } from "./components/confirm-password/confirm-
     ReactiveFormsModule,
     ThemeModule,
   ],
+  providers: [AccountService],
 })
 export class AuthenticationModule {}

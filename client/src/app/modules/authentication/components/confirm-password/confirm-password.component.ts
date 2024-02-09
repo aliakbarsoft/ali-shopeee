@@ -8,6 +8,7 @@ import {
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { AccountService } from "../../../../shared/services/account.service";
 
 @Component({
   selector: "app-confirm-password",
@@ -19,7 +20,7 @@ export class ConfirmPasswordComponent {
   getUserName!: string;
 
   constructor(
-    private authService: AuthService,
+    private accountService: AccountService,
     private router: Router,
     private toastService: ToastrService
   ) {}
@@ -35,7 +36,7 @@ export class ConfirmPasswordComponent {
   }
 
   submit(newPassword: any): void {
-    this.authService.confirmForget(newPassword).subscribe((res) => {
+    this.accountService.confirmForget(newPassword).subscribe((res) => {
       if (res) {
         this.router.navigate(["auth/reset-password"]);
         this.toastService.success("ورود شما با موفقیت انجام شد"),

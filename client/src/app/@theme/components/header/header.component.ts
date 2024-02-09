@@ -1,21 +1,18 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import {
-  NbLayoutDirection,
-  NbLayoutDirectionService,
   NbMediaBreakpointsService,
   NbMenuService,
   NbSidebarService,
-  NbThemeService,
+  NbThemeService
 } from "@nebular/theme";
 
+import { Router } from "@angular/router";
+import { Subject } from "rxjs";
+import { map, takeUntil } from "rxjs/operators";
 import { UserData } from "../../../@core/data/users";
 import { LayoutService } from "../../../@core/utils";
-import { map, takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
-import { Router } from "@angular/router";
 import { StorageService } from "../../../shared/clinet-service/storage.service";
-import { LOCALSTORAGE_ITEMS } from "../../../shared/data/localStorage.item.data";
-import { AuthService } from "../../../modules/authentication/services/auth.service";
+import { AccountService } from "../../../shared/services/account.service";
 
 @Component({
   selector: "ngx-header",
@@ -57,7 +54,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private userService: UserData,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
-    private authService: AuthService,
     private storageService: StorageService,
     private router: Router
   ) {}
@@ -123,7 +119,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   showProfile(){
-    this.router.navigate(['auth/profile'])
+    this.router.navigate(['/profile'])
   }
 
   showDashboard(){

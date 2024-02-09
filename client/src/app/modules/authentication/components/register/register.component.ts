@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { IRegister } from "../../interfaces/register.dto";
+import { AccountService } from "../../../../shared/services/account.service";
 
 @Component({
   selector: "ali-register",
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   showPassword = true;
 
   constructor(
-    private authService: AuthService,
+    private accountService: AccountService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -53,12 +54,11 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.createFormGroup();
   }
 
-
   getInputType() {
     if (this.showPassword) {
-      return 'text';
+      return "text";
     }
-    return 'password';
+    return "password";
   }
 
   toggleShowPassword() {
@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.authService.register(this.registerForm.value).subscribe({
+    this.accountService.register(this.registerForm.value).subscribe({
       next: (restult: IRegister) => {
         if (restult.confirmNewPassword) {
           this.toastr.success("اطلاعات شما با موفقیت ثبت شد"),

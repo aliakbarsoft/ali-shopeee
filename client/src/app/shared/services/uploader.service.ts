@@ -15,7 +15,7 @@ export class UploaderService {
     const fileToUpload = file[0] as File;
     const formData = new FormData();
     formData.append("file", fileToUpload, fileToUpload.name);
-    return this.http.post(`${environment.Baseurl}uploadImage`, formData);
+    return this.http.post(`${environment.apiEndPoint}uploadImage`, formData);
   }
 
   addProducts(product: IProducts):Observable<IProducts> {
@@ -30,7 +30,7 @@ export class UploaderService {
       price: product.price,
       description: product.description,
     };
-    this.http.post(environment.Baseurl + "products", payload).subscribe((res)=>{
+    this.http.post(environment.apiEndPoint + "products", payload).subscribe((res)=>{
       this.toastService.success('محصول شما با موفقیت ثبت شد')
     });
   }

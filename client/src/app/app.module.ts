@@ -27,9 +27,10 @@ import {
   ErrorHandlerInterceptor,
 } from "./modules/authentication/interceptors";
 import { HomeModule } from "./modules/home/home.module";
+import { ProfileLayoutComponent } from './modules/profile/profile-layout/profile-layout.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ProfileLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

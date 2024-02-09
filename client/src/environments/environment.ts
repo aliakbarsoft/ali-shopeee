@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  Baseurl: "http://localhost:3000/v1/",
+  apiEndPoint: "http://localhost:3000/v1",
   urlProduct: "http://localhost:3000/",
 };

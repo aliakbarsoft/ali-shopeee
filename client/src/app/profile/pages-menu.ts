@@ -1,6 +1,6 @@
 import { NbMenuItem } from "@nebular/theme";
 
-export const PROFILE_MENU_ITEMS: NbMenuItem[] = [
+export const DASHBOARD_MENU_ITEMS: NbMenuItem[] = [
   {
     title: "محصولات",
     icon: "shopping-cart-outline",
@@ -9,6 +9,20 @@ export const PROFILE_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: " بارگزاری محصولات",
+    icon: "shopping-cart-outline",
+    link: "/home/uploader",
+    home: true,
+  },
+];
+export const PROFILE_MENU_ITEMS: NbMenuItem[] = [
+  {
+    title: "برگزیده ها",
+    icon: "shopping-cart-outline",
+    link: "/home/products",
+    home: true,
+  },
+  {
+    title: "کالای خریداری شده",
     icon: "shopping-cart-outline",
     link: "/home/uploader",
     home: true,

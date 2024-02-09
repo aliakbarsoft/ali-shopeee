@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home.component";
 import { NotFoundComponent } from "../../profile/miscellaneous/not-found/not-found.component";
+import { ProfileLayoutComponent } from "../profile/profile-layout/profile-layout.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,11 @@ const routes: Routes = [
         path: "products",
         loadChildren: () =>
           import("../products/products.module").then((m) => m.ProductsModule),
+      },
+      {
+        path: "profile",
+        component:ProfileLayoutComponent
+    
       },
 
       {

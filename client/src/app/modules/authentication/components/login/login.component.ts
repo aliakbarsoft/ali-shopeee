@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../../services/auth.service";
 import { LoginResultDTO } from "../../interfaces/user";
+import { AccountService } from "../../../../shared/services/account.service";
 
 @Component({
   selector: "ali-login",
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     protected router: Router,
-    protected authService: AuthService,
+    protected accountService: AccountService,
     private toastr: ToastrService
   ) {}
 
@@ -42,12 +43,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  
   getInputType() {
     if (this.showPassword) {
-      return 'text';
+      return "text";
     }
-    return 'password';
+    return "password";
   }
 
   toggleShowPassword() {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.toastr.clear();
-    this.authService
+    this.accountService
       .login(this.loginForm.value)
       .subscribe((result: LoginResultDTO) => {
         if (result.access_token) {

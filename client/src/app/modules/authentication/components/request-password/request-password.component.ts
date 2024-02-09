@@ -4,10 +4,9 @@ import {
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
-import { User } from "../../../../@core/data/users";
 import { ToastrService } from "ngx-toastr";
+import { AccountService } from "../../../../shared/services/account.service";
 
 @Component({
   selector: "ali-request-password",
@@ -18,7 +17,7 @@ export class RequestPasswordComponent implements OnInit {
   form: UntypedFormGroup;
 
   constructor(
-    private authService: AuthService,
+    private accountService: AccountService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -38,9 +37,9 @@ export class RequestPasswordComponent implements OnInit {
   }
 
   submit(email: string) {
-    this.authService.requestReset(email).subscribe((res) => {
+    this.accountService.requestReset(email).subscribe((res) => {
       if (res) {
-        this.authService.setEmailUser.next(email);
+        this.accountService.setEmailUser.next(email);
         this.toastr.success("رمز برای ایمیل شما ارسال شد'"),
           {
             timeOut: 1000,

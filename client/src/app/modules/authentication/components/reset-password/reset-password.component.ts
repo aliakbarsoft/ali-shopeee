@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../../services/auth.service";
 import { IUser } from "../../interfaces/user";
+import { AccountService } from "../../../../shared/services/account.service";
 
 @Component({
   selector: "ali-reset-password",
@@ -19,7 +20,7 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     protected router: Router,
-    protected authService: AuthService,
+    protected accountService: AccountService,
     private toastr: ToastrService
   ) {}
 
@@ -40,7 +41,7 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
   submit(password) {
-    this.authService.changePassword(password).subscribe((res) => {
+    this.accountService.changePassword(password).subscribe((res) => {
       if (res) {
         this.toastr.success("پسوورد شما با موفقیت تغییر یافت"),
           {
