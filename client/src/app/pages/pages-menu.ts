@@ -4,13 +4,13 @@ export const PROFILE_MENU_ITEMS: NbMenuItem[] = [
   {
     title: "محصولات",
     icon: "shopping-cart-outline",
-    link: "home/products",
+    link: "/home/products",
     home: true,
   },
   {
     title: " بارگزاری محصولات",
     icon: "shopping-cart-outline",
-    link: "home/uploader",
+    link: "/home/uploader",
     home: true,
   },
 ];

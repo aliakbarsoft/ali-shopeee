@@ -20,7 +20,7 @@ import { SharedModule } from '../../shared/shared.module';
     ThemeModule,
     NbMenuModule,
     ProductsModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class HomeModule { }

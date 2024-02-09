@@ -8,11 +8,15 @@ const routes: Routes = [
     path: "",
     component: HomeComponent,
     children: [
-   
+      {
+        path: "products",
+        loadChildren: () =>
+          import("../products/products.module").then((m) => m.ProductsModule),
+      },
 
       {
         path: "",
-        redirectTo: "upload",
+        redirectTo: "products",
         pathMatch: "full",
       },
       {
