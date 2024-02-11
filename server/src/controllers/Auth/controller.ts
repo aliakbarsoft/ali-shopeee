@@ -46,7 +46,7 @@ routes.post(
 
 // forget-confirm
 routes.post(
-  '/auth/forget-confirm',
+  '/account/forget-confirm',
   asyncHandler(async function forgetPasswordCodeConfirmation(req: Request, res: Response) {
     const formData = req.body
     const result = await AuthService.confirmForgetPasswordToken(formData)
@@ -55,7 +55,7 @@ routes.post(
 )
 
 routes.post(
-  '/auth/change-pass',
+  '/account/change-pass',
   asyncHandler(async function changeAccountPassword(req: Request, res: Response) {
     const formData = req.body
     const result = await AuthService.changeAccountPassword(formData)

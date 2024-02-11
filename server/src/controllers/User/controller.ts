@@ -21,7 +21,7 @@ routes.get(
 
 // /forget/:email
 routes.get(
-  "/auth/forget/:email",
+  "/account/forget/:email",
   asyncHandler(async function forgetPsssword(req: Request, res: Response) {
     const email = req.params.email;
     const data = await UserService.sendFrogetPasswordToken(email);
