@@ -2,7 +2,7 @@ import { NbMenuItem } from "@nebular/theme";
 
 export const DASHBOARD_MENU_ITEMS: NbMenuItem[] = [
   {
-    title: "محصولات",
+    title: " محصولات",
     icon: "shopping-cart-outline",
     link: "/home/products",
     home: true,
@@ -10,7 +10,7 @@ export const DASHBOARD_MENU_ITEMS: NbMenuItem[] = [
   {
     title: " بارگزاری محصولات",
     icon: "shopping-cart-outline",
-    link: "/home/uploader",
+    link: "/home/upload-product",
     home: true,
   },
 ];
@@ -31,9 +31,15 @@ export const PROFILE_MENU_ITEMS: NbMenuItem[] = [
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: "محصولات",
+    title: "بارگزاری محصولات ",
     icon: "shopping-cart-outline",
     link: "/dashboard/upload-product",
+    home: true,
+  },
+  {
+    title: " نمایش محصولات" ,
+    icon: "shopping-cart-outline",
+    link: "/dashboard/products",
     home: true,
   },
 

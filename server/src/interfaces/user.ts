@@ -3,82 +3,55 @@ export interface ILoginAttributes {
   password: string;
 }
 
-export interface IUserAttributes {
-  id: string;
-  firstName: string;
-  lastName: string;
-  nickName: string;
-  email: string;
-  phoneNumber: string;
-  isActive?: boolean | null;
-  tokenVerify?: string | null;
-  password?: string;
-  confirmNewPassword?: string;
-  registerDate?: Date;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date | null;
-  //
-  language_Id?: number;
-  country_Id?: number;
-}
+
 
 export interface IUser {
-  id: string;
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  nickName: string;
-  email: string;
-  password?: string;
-  phoneNumber: string;
-  isActive?: boolean | null;
-  tokenVerify?: string | null;
-  newPassword?: string;
-  confirmNewPassword?: string;
-  registerDate?: Date;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date | null;
-  language_Id?: number;
-  country_Id?: number;
-  city_Id?: number;
-  verify_code: string;
-  emailConfirmed: boolean;
-  signupStatus: number;
-  hasPic: boolean;
-  autoLogin: boolean;
-  allow_change_pass: boolean;
-  personality_Id: number;
+  user_id?: number;
+  user_firstName?: string;
+  user_lastName?: string;
+  user_email: string ;
+  user_password?: string;
+  user_confirmPassword?: string;
+  user_city?: string;
+  user_verification_code?: string;
+  user_verified?:string;
+  user_state?: string;
+  user_zip?: string;
+  user_email_veryfied?: string;
+  user_registeration_date?: string;
+  user_ip?: string;
+  user_phone?: string;
+  user_fax?: string;
+  user_country?: string;
+  user_address?: string;
+  user_address2?: string;
+  user_allow_change_pas?: boolean;
 }
 
-
-export interface CreateUser {
-  id: string
-  email: string
-  newPassword: string
-  confirmNewPassword: string
-  language_Id?: number
-  tokenVerify?: string | null
-  verify_code: string
+export interface CreateUser extends IUser {
+  new_user: IUser[];
+  newPassword: string;
+  user_confirmPassword: string;
+  language_Id?: number;
+  tokenVerify?: string | null;
+  verify_code: string;
 }
 
 export interface ConfirmForgetPass {
-  email: string
-  verify_code: string
-}
-
-
-export interface IChangePassword {
-  id: string
-  email: string
-  newPassword: string
-  confirmNewPassword: string
+  email: string;
+  verify_code: string;
 }
 
 export interface IChangePassword {
-  id: string
-  email: string
-  newPassword: string
-  confirmNewPassword: string
+  id: string;
+  email: string;
+  newPassword: string;
+  user_confirmPassword: string;
+}
+
+export interface IChangePassword {
+  id: string;
+  email: string;
+  newPassword: string;
+  user_confirmPassword: string;
 }

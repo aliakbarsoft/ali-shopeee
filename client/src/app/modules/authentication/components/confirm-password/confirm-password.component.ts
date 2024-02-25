@@ -1,11 +1,9 @@
-
 import { Component } from "@angular/core";
 import {
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { AccountService } from "../../../../shared/services/account.service";
@@ -27,7 +25,10 @@ export class ConfirmPasswordComponent {
 
   createFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
-      password: new UntypedFormControl("", [Validators.required,Validators.minLength(4)]),
+      password: new UntypedFormControl("", [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
     });
   }
 

@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("//fonts.googleapis.com/earlyaccess/notosanstc.css");
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.mat-calendar-body-cell.selected {
+  background-color: red !important;
+  border-radius: 50%;
+}
+.drop-calendar {
+  width: 30rem;
+}
+
 
 // @import url("./assets/css/index.scss");
 // @import 'tailwindcss/base';

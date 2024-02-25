@@ -28,6 +28,10 @@ import {
 } from "./modules/authentication/interceptors";
 import { HomeModule } from "./modules/home/home.module";
 import { ProfileLayoutComponent } from './modules/profile/profile-layout/profile-layout.component';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
+import { JalaliMomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "./shared/data/jalali-picker";
+import { JALALI_MOMENT_FORMATS, MOMENT_FORMATS } from "./shared/data/jalali-format";
+
 
 @NgModule({
   declarations: [AppComponent, ProfileLayoutComponent],
@@ -61,6 +65,8 @@ import { ProfileLayoutComponent } from './modules/profile/profile-layout/profile
     // }),
   ],
   bootstrap: [AppComponent],
+
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -72,6 +78,28 @@ import { ProfileLayoutComponent } from './modules/profile/profile-layout/profile
       useClass: ErrorHandlerInterceptor,
       multi: true,
     },
+
+    {
+      provide: DateAdapter,
+      useClass: JalaliMomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'fa' },
+    {
+      provide: MAT_DATE_FORMATS,
+      useFactory: locale => {
+        if (locale === 'fa') {
+          return JALALI_MOMENT_FORMATS;
+        } else {
+          return MOMENT_FORMATS;
+        }
+      },
+      deps: [MAT_DATE_LOCALE]
+      // useValue: JALALI_MOMENT_FORMATS
+    },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
+
+    
   ],
 })
 export class AppModule {}

@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { IRegister } from "../../modules/authentication/interfaces/register.dto";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { tap } from "rxjs/operators";
 import { Ability, AbilityBuilder, createMongoAbility } from "@casl/ability";
 
 import {
-  IUser,
   LoginDTO,
   LoginResultDTO,
+  UserDTO,
 } from "../../modules/authentication/interfaces/user";
 import { StorageService } from "../clinet-service/storage.service";
 import { environment } from "../../../environments/environment";
@@ -21,7 +21,7 @@ import { NumberUtility } from "../utilities/number.utilities";
 })
 export class AccountService {
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
-  userId!: Pick<IUser, "id">;
+  userId!: Pick<UserDTO, "user_id">;
   userName = new BehaviorSubject<string>("");
   setEmailUser = new BehaviorSubject<string>("");
   id!: number;
@@ -83,8 +83,15 @@ export class AccountService {
     return this.storageService.getAccessToken() !== null;
   }
 
-  requestReset(email: string): Observable<any> {
-    return this.http.get(this.apiAddress + `'/forget'${email}`);
+  requestReset(user_email: string): Observable<any> {
+    return this.http.get(this.apiAddress + `/forget/${user_email}`);
+    // let queryParams = new HttpParams();
+    // queryParams = queryParams.append("user_email", user_email);
+    // return this.http.get<string>(this.apiAddress + "/forget" , {
+    //   params: queryParams,
+    // });
+
+    // return this.http.get<UserInformation>(url,{params:queryParams});
   }
 
   confirmForget(code: string): Observable<string> {

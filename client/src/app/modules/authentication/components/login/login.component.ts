@@ -6,7 +6,6 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { AuthService } from "../../services/auth.service";
 import { LoginResultDTO } from "../../interfaces/user";
 import { AccountService } from "../../../../shared/services/account.service";
 
@@ -31,12 +30,12 @@ export class LoginComponent implements OnInit {
 
   createFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
-      email: new UntypedFormControl("", [
+      user_email: new UntypedFormControl("", [
         Validators.required,
         Validators.email,
         Validators.pattern(".+@.+..+"),
       ]),
-      password: new UntypedFormControl("", [
+      user_password: new UntypedFormControl("", [
         Validators.required,
         Validators.minLength(7),
       ]),
@@ -59,11 +58,12 @@ export class LoginComponent implements OnInit {
     this.accountService
       .login(this.loginForm.value)
       .subscribe((result: LoginResultDTO) => {
+        
         if (result.access_token) {
           this.router.navigate(["/dashboard"]);
           this.toastr.success(
             "ورود شما با موفقیت انجام شد",
-            `${result.user.firstName + " " + result.user.lastName}`
+            `${result.user.user_firstName + " " + result.user.user_lastName}`
           ),
             {
               timeOut: 1000,
@@ -76,29 +76,6 @@ export class LoginComponent implements OnInit {
         }
       });
 
-    // this.authService
-    //   .login(this.loginForm.value.email, this.loginForm.value.password)
-    //   .subscribe((res) => {
-    //     if (res.isSuccessful) {
-    //       const getUserInfo = res.user.firstName + " " + res.user.lastName;
-    //       localStorage.setItem("access_token", res.access_token);
-    //      localStorage.setItem("userName",getUserInfo)
-    //       this.authService.userName.next(getUserInfo);
-    //       this.router.navigate(["pages"]);
-    //       this.toastr.success(
-    //         "ورود شما با موفقیت انجام شد",
-    //         `${getUserInfo}`
-    //       ),
-    //         {
-    //           timeOut: 1000,
-    //         };
-    //     } else {
-    //       this.toastr.error("لطفاً یک ایمیل معتبر وارد کنید."),
-    //         {
-    //           timeOut: 1000,
-    //         };
-    //     }
-    //   });
   }
   routeLogin() {
     this.router.navigate(["register"]);

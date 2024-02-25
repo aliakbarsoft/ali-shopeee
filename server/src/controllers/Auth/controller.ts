@@ -6,7 +6,7 @@ import { Request, Response } from "express";
 
 require("dotenv").config;
 
-// sign-up
+// register
 routes.post(
   "/account/register",
   asyncHandler(async function signUp(req: Request, res: Response) {
@@ -18,7 +18,7 @@ routes.post(
   })
 );
 
-// sign-in
+// login
 routes.post(
   "/account/login",
   asyncHandler(async function signIn(req: Request, res: Response) {

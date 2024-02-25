@@ -1,9 +1,10 @@
 export const LOCALSTORAGE_ITEMS: LocalStorageItems = {
-  firstName: "firstName",
-  lastName: "lastName",
-  email: "email",
-  username: "username",
-  password: "password",
+  user_email: "string",
+  user_password: "string",
+  user_confirmPassword: "string",
+  userName:"userName",
+  user_firstName: "string",
+  user_lastName: "string",
   access_token: "accessToken",
   refreshToken: "refreshToken",
   accessTokenStoreTime: "accessTokenStoredAt", // should be in milliseconds
@@ -15,11 +16,12 @@ export const LOCALSTORAGE_ITEMS: LocalStorageItems = {
 };
 
 export interface LocalStorageItems {
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  password: string;
+  user_email: string;
+  userName:string;
+  user_password: string;
+  user_confirmPassword: string;
+  user_firstName: string;
+  user_lastName: string;
   access_token: string;
   refreshToken: string;
   accessTokenStoreTime: string;

@@ -11,5 +11,6 @@
 export const environment = {
   production: false,
   apiEndPoint: "http://localhost:3000/v1",
-  urlProduct: "http://localhost:3000/",
+  urlProductPic: "http://localhost:3000/products/",
+
 };

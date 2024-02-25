@@ -6,8 +6,6 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { AuthService } from "../../services/auth.service";
-import { IUser } from "../../interfaces/user";
 import { AccountService } from "../../../../shared/services/account.service";
 
 @Component({

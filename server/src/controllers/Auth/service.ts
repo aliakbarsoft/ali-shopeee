@@ -9,13 +9,11 @@ import {
   changeAccountPasswordByEmail,
   confirmForgetPass,
   createNewUser,
-  getUserByGoogleId,
   getUserByPassword,
 } from "../../bin/db";
 import schemaAuth from "../../controllers/Auth/schema";
 import { getUniqueCodev2, getUniqueCodev3 } from "../../helper/Common";
 import useValidation from "../../helper/useValidation";
-import { UserAttributes } from "../../models/user";
 import ResponseError from "../../modules/Response/ResponseError";
 import UserService from "../User/service";
 
@@ -26,34 +24,34 @@ const JWT_REFRESH_TOKEN_EXPIRED =
 const expiresIn = ms(JWT_ACCESS_TOKEN_EXPIRED) / 1000;
 
 class AuthService {
-  public static async signUp(formData: UserAttributes) {
+  public static async signUp(formData: any) {
     // check duplicate email
-    await UserService.validateUserEmail(formData.email);
-
-    const generateToken = {
-      code: getUniqueCodev2(),
-    };
-
-    const tokenVerify = jwt.sign(
-      JSON.parse(JSON.stringify(generateToken)),
-      JWT_SECRET_ACCESS_TOKEN,
-      {
-        expiresIn,
-      }
+    const currentUser = await UserService.validateUserEmail(
+      formData.user_email
     );
-    formData.verify_code = getUniqueCodev3();
-    const newFormData = { ...formData, tokenVerify };
-    const value = useValidation(schemaAuth.register, newFormData);
-    const data = await createNewUser(value);
+    if (currentUser?.user_email) {
+      return { message: "the user already exist !", code: 409, currentUser };
+    } else {
+      const generateToken = {
+        code: getUniqueCodev2(),
+      };
 
-    // Initial Send an e-mail
-    // SendMail.AccountRegister(formData, tokenVerify)
-
-    return {
-      message:
-        "registration is successful, check your email for the next steps",
-      data,
-    };
+      const tokenVerify = jwt.sign(
+        JSON.parse(JSON.stringify(generateToken)),
+        JWT_SECRET_ACCESS_TOKEN,
+        {
+          expiresIn,
+        }
+      );
+      
+      const newFormData = { ...formData, tokenVerify };
+      const value = useValidation(schemaAuth.register, newFormData);
+      const data = await createNewUser(value);
+      return {
+        message: "registration is successful",
+        data,
+      };
+    }
   }
 
   public static async signIn(req: any, formData: ILoginAttributes) {
@@ -61,7 +59,7 @@ class AuthService {
 
     const value = useValidation(schemaAuth.login, formData);
 
-    const userData = await getUserByPassword(value.email, value.password);
+    const userData = await getUserByPassword(value.user_email, value.user_password);
 
     if (!userData) {
       return {
@@ -78,12 +76,11 @@ class AuthService {
       if (comparePassword) {
         // modif payload token
         const payloadToken = {
-          id: userData.id,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          // fullName: userData.fullName,
-          // languageId: userData.language_Id,
-          email: userData.email,
+          user_id: userData.user_id,
+          user_firstName: userData.user_firstName,
+          user_lastName: userData.user_lastName,
+          user_email: userData.user_email,
+          // active: userData.is,
         };
 
         // Access Token
@@ -121,13 +118,13 @@ class AuthService {
         // create directory
         // await createDirectory(userData.id)
         return {
+          user: payloadToken,
           isSuccessful: true,
           message: "Login successfully",
           access_token,
           expiresIn,
           token_type: "Bearer",
           refresh_token,
-          user: payloadToken,
         };
       }
 
@@ -140,53 +137,53 @@ class AuthService {
     );
   }
 
-  public static async signInWithGoogle(req: any, formData: ILoginAttributes) {
-    const { clientIp, useragent } = req;
-    const value = useValidation(schemaAuth.login, formData);
-    const userData = await getUserByGoogleId(value.password);
-    if (!userData) {
-      throw new ResponseError.NotFound("account not found or has been deleted");
-    }
+  // public static async signInWithGoogle(req: any, formData: ILoginAttributes) {
+  //   const { clientIp, useragent } = req;
+  //   const value = useValidation(schemaAuth.login, formData);
+  //   const userData = await getUserByGoogleId(value.password);
+  //   if (!userData) {
+  //     throw new ResponseError.NotFound("account not found or has been deleted");
+  //   }
 
-    /* User active proses login */
-    if (userData.isActive) {
-      // @ts-ignore
-      // const comparePassword = await userData.comparePassword(value.password)
-      const comparePassword = true;
-      if (comparePassword) {
-        // modif payload token
-        const payloadToken = {
-          id: userData.id,
-          firstNama: userData.firstName,
-          lastName: userData.lastName,
-          email: userData.email,
-          active: userData.isActive,
-        };
-        // Access Token
-        const ascess_token = jwt.sign(
-          JSON.parse(JSON.stringify(payloadToken)),
-          JWT_SECRET_REFRESH_TOKEN,
-          {
-            expiresIn,
-          }
-        );
+  //   /* User active proses login */
+  //   if (userData.isActive) {
+  //     // @ts-ignore
+  //     // const comparePassword = await userData.comparePassword(value.password)
+  //     const comparePassword = true;
+  //     if (comparePassword) {
+  //       // modif payload token
+  //       const payloadToken = {
+  //         id: userData.id,
+  //         firstNama: userData.firstName,
+  //         lastName: userData.lastName,
+  //         email: userData.email,
+  //         active: userData.isActive,
+  //       };
+  //       // Access Token
+  //       const ascess_token = jwt.sign(
+  //         JSON.parse(JSON.stringify(payloadToken)),
+  //         JWT_SECRET_REFRESH_TOKEN,
+  //         {
+  //           expiresIn,
+  //         }
+  //       );
 
-        // Refresh Token
-        const refresh_token = jwt.sign(
-          JSON.parse(JSON.stringify(payloadToken)),
-          JWT_SECRET_REFRESH_TOKEN,
-          {
-            expiresIn: JWT_REFRESH_TOKEN_EXPIRED,
-          }
-        );
-        // create refresh token
-        //  await RefreshTokenService.create({
-        //   UserId: userData.id,
-        //   token: refresh_token,
-        // })
-      }
-    }
-  }
+  //       // Refresh Token
+  //       const refresh_token = jwt.sign(
+  //         JSON.parse(JSON.stringify(payloadToken)),
+  //         JWT_SECRET_REFRESH_TOKEN,
+  //         {
+  //           expiresIn: JWT_REFRESH_TOKEN_EXPIRED,
+  //         }
+  //       );
+  //       // create refresh token
+  //       //  await RefreshTokenService.create({
+  //       //   UserId: userData.id,
+  //       //   token: refresh_token,
+  //       // })
+  //     }
+  //   }
+  // }
 
   public static async confirmForgetPasswordToken(formData: ConfirmForgetPass) {
     useValidation(schemaAuth.confirmEmailCode, formData);

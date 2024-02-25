@@ -15,7 +15,7 @@ export class UploaderService {
     const fileToUpload = file[0] as File;
     const formData = new FormData();
     formData.append("file", fileToUpload, fileToUpload.name);
-    return this.http.post(`${environment.apiEndPoint}uploadImage`, formData);
+    return this.http.post(`${environment.apiEndPoint}/uploadImage`, formData);
   }
 
   addProducts(product: IProducts):Observable<IProducts> {
@@ -24,13 +24,10 @@ export class UploaderService {
       console.error("No category selected");
       return;
     }
+    debugger  
 
-    const payload = {
-      product_name: product.product_name,
-      price: product.price,
-      description: product.description,
-    };
-    this.http.post(environment.apiEndPoint + "products", payload).subscribe((res)=>{
+    const payload = {...product};
+    this.http.post(environment.apiEndPoint + "/" + "product", payload).subscribe((res)=>{
       this.toastService.success('محصول شما با موفقیت ثبت شد')
     });
   }

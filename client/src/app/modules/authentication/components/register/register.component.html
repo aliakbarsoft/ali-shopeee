@@ -10,15 +10,15 @@
           <input
             type="firstName"
             nbInput
-            formControlName="firstName"
+            formControlName="user_firstName"
             fullWidth
-            id="firstName"
+            id="user_firstName"
             placeholder="نام"
           />
-          <ng-container *ngIf="registerForm.controls.firstName.touched">
+          <ng-container *ngIf="registerForm.controls.user_firstName.touched">
             <p
               class="caption status-danger"
-              *ngIf="registerForm.controls.firstName.errors?.required"
+              *ngIf="registerForm.controls.user_firstName.errors?.required"
             >
               نام الزامی میباشد
             </p>
@@ -29,15 +29,15 @@
           <input
             type="lastName"
             nbInput
-            formControlName="lastName"
+            formControlName="user_lastName"
             fullWidth
-            id="lastName"
+            id="user_lastName"
             placeholder="نام خانوادگی"
           />
-          <ng-container *ngIf="registerForm.controls.lastName.touched">
+          <ng-container *ngIf="registerForm.controls.user_lastName.touched">
             <p
               class="caption status-danger"
-              *ngIf="registerForm.controls.lastName.errors?.required"
+              *ngIf="registerForm.controls.user_lastName.errors?.required"
             >
               نام خانوادگی الزامی میباشد
             </p>
@@ -48,15 +48,15 @@
           <input
             type="email"
             nbInput
-            formControlName="email"
+            formControlName="user_email"
             fullWidth
-            id="email"
+            id="user_email"
             placeholder="ایمیل"
           />
-          <ng-container *ngIf="registerForm.controls.email.touched">
+          <ng-container *ngIf="registerForm.controls.user_email.touched">
             <p
               class="caption status-danger"
-              *ngIf="registerForm.controls.email.errors?.required"
+              *ngIf="registerForm.controls.user_email.errors?.required"
             >
               ایمیل الزامی میباشد
             </p>
@@ -67,7 +67,7 @@
           <label for="password" class="label"> رمز عبور</label>
           <input
             fullWidth
-            formControlName="password"
+            formControlName="user_password"
             [type]="getInputType()"
             nbInput
           />
@@ -87,10 +87,10 @@
             >
             </nb-icon>
           </button>
-          <ng-container *ngIf="registerForm.controls.password.touched">
+          <ng-container *ngIf="registerForm.controls.user_password.touched">
             <p
               class="caption status-danger"
-              *ngIf="registerForm.controls.password.errors?.required"
+              *ngIf="registerForm.controls.user_password.errors?.required"
             >
               رمز عبور الزامی میباشد
             </p>
@@ -101,7 +101,7 @@
           <label for="confirmNewPassword" class="label">تکرار رمز</label>
           <input
             fullWidth
-            formControlName="confirmNewPassword"
+            formControlName="user_confirmPassword"
             [type]="getInputType()"
             nbInput
           />
@@ -122,11 +122,13 @@
             </nb-icon>
           </button>
           <ng-container
-            *ngIf="registerForm.controls.confirmNewPassword.touched"
+            *ngIf="registerForm.controls.user_confirmPassword.touched"
           >
             <p
               class="caption status-danger"
-              *ngIf="registerForm.controls.confirmNewPassword.errors?.required"
+              *ngIf="
+                registerForm.controls.user_confirmPassword.errors?.required
+              "
             >
               تکرار رمز عبور الزامی میباشد
             </p>

@@ -8,7 +8,7 @@ import handlebars from "handlebars";
 
 class SendEmail {
   public static AccountRegister(formData: CreateUser) {
-    const { email } = formData;
+    const { user_email } = formData;
     const TOKEN = formData.verify_code;
     const pathTemplate = path.resolve(
       __dirname,
@@ -28,12 +28,12 @@ class SendEmail {
       const template = handlebars.compile(html);
       const htmlToSend = template(dataTemplate);
 
-      Email.send(email, subject, htmlToSend);
+      Email.send(user_email, subject, htmlToSend);
     });
   }
 
   public static forgetPassToken(formData: IUser, token: string) {
-    const { email } = formData;
+    const { user_email } = formData;
     const TOKEN = token;
     const pathTemplate = path.resolve(
       __dirname,
@@ -52,8 +52,7 @@ class SendEmail {
 
       const template = handlebars.compile(html);
       const htmlToSend = template(dataTemplate);
-      Email.send(email, subject, htmlToSend);
-      
+      Email.send(user_email, subject, htmlToSend);
     });
   }
 }

@@ -1,6 +1,7 @@
 import { IUser } from "interfaces/user";
 import {
   checkUserExist,
+  getUserByEmail,
   getUserById,
   updateUserVerifyCode,
 } from "../../bin/db";
@@ -32,10 +33,13 @@ class UserService {
    * @param email
    */
 
+  
+
   public static async validateUserEmail(email: string) {
     const data = await checkUserExist(email);
     if (data.length) {
       return data[0] as IUser;
+
     }
     return null;
   }
@@ -43,10 +47,10 @@ class UserService {
    *
    * @param formdata
    */
-  public static async sendFrogetPasswordToken(email: string) {
+  public static async sendFrogetPasswordToken(user_email: string) {
     // eslint-disable-next-line object-shorthand
-    useValidation(schemaAuth.checkEmail, { email: email });
-    const currentUser = await UserService.validateUserEmail(email);
+    useValidation(schemaAuth.checkEmail, { user_email: user_email });
+    const currentUser = await UserService.validateUserEmail(user_email);
     if (!currentUser) return { status: 1, message: "email is not valid !" };
 
     // if (!currentUser.emailConfirmed)
@@ -59,7 +63,7 @@ class UserService {
     // if (!currentUser.isActive)
     // return { status: 4, message: "this account is not active !" };
     const newCode = getUniqueCodev3();
-    await updateUserVerifyCode(currentUser.email, newCode);
+    await updateUserVerifyCode(currentUser.user_email, newCode);
     // send forgot pass token code
     SendEmail.forgetPassToken(currentUser, newCode);
     return { status: 2, message: "code has been send successfully !" };

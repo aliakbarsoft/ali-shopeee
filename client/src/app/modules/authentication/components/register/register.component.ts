@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import {
   UntypedFormControl,
@@ -9,6 +8,7 @@ import {
 import { ToastrService } from "ngx-toastr";
 import { IRegister } from "../../interfaces/register.dto";
 import { AccountService } from "../../../../shared/services/account.service";
+import { ErrorService } from "../../../../shared/clinet-service/error.service";
 
 @Component({
   selector: "ali-register",
@@ -22,28 +22,29 @@ export class RegisterComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private errorService:ErrorService
   ) {}
 
   createFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
-      firstName: new UntypedFormControl("", [
+      user_firstName: new UntypedFormControl("", [
         Validators.required,
         Validators.minLength(2),
       ]),
-      lastName: new UntypedFormControl("", [
+      user_lastName: new UntypedFormControl("", [
         Validators.required,
         Validators.minLength(2),
       ]),
-      email: new UntypedFormControl("", [
+      user_email: new UntypedFormControl("", [
         Validators.required,
         Validators.email,
       ]),
-      password: new UntypedFormControl("", [
+      user_password: new UntypedFormControl("", [
         Validators.required,
         Validators.minLength(8),
       ]),
-      confirmNewPassword: new UntypedFormControl("", [
+      user_confirmPassword: new UntypedFormControl("", [
         Validators.required,
         Validators.minLength(8),
       ]),
@@ -70,26 +71,30 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.accountService.register(this.registerForm.value).subscribe({
-      next: (restult: IRegister) => {
-        if (restult.confirmNewPassword) {
+    this.accountService
+      .register(this.registerForm.value)
+      .subscribe((res: IRegister) => {
+        if (res.code == 200) {
+
           this.toastr.success("اطلاعات شما با موفقیت ثبت شد"),
             {
               timeOut: 1000,
             };
           this.router.navigate(["auth/login"]);
         }
-      },
-      complete: () => {
-        console.log("Register is successfully");
-      },
-    });
+      });
 
-    // if (res) {
-    //   this.toastr.success("اطلاعات شما با موفقیت ثبت شد"),
-    //     {
-    //       timeOut: 1000,
-    //     };
-    // }
+    // ({
+    // next: (restult: IRegister) => {
+    //   
+    //   if (restult.user_confirmPassword) {
+
+    //
+    //   }
+    // },
+    // complete: () => {
+    //   console.log("Register is successfully");
+    // },
+    // });
   }
 }

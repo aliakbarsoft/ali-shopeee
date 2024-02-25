@@ -1,8 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { ProductsRoutingModule } from './products-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NbCardModule, NbSelectModule } from '@nebular/theme';
 import { ProductsComponent } from './components/products/products.component';
+import { ProductsRoutingModule } from './products-routing.module';
+import { ProductService } from './services/product.service';
 
 
 @NgModule({
@@ -11,8 +14,12 @@ import { ProductsComponent } from './components/products/products.component';
   ],
   imports: [
     CommonModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    HttpClientModule,
+    NbSelectModule,
+    NbCardModule
   ],
-  exports:[ProductsComponent]
+  exports:[ProductsComponent],
+  providers:[ProductService]
 })
 export class ProductsModule { }

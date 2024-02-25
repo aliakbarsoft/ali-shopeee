@@ -28,7 +28,7 @@ export class RequestPasswordComponent implements OnInit {
 
   createFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
-      email: new UntypedFormControl("", [
+      user_email: new UntypedFormControl("", [
         Validators.required,
         Validators.email,
         Validators.pattern(".+@.+..+"),
@@ -36,10 +36,10 @@ export class RequestPasswordComponent implements OnInit {
     });
   }
 
-  submit(email: string) {
-    this.accountService.requestReset(email).subscribe((res) => {
+  submit(user_email: string) {
+    this.accountService.requestReset(user_email).subscribe((res) => {
       if (res) {
-        this.accountService.setEmailUser.next(email);
+        this.accountService.setEmailUser.next(user_email);
         this.toastr.success("رمز برای ایمیل شما ارسال شد'"),
           {
             timeOut: 1000,

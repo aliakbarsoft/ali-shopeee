@@ -8,4 +8,4 @@ export default router;
 require("../controllers/Auth/controller");
 require("../controllers/User/controller");
 require("../controllers/file-uploader/controller");
-// require("../helper/ImageUploader");
+require("../controllers/products/controller");

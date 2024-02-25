@@ -15,12 +15,12 @@ export class StorageService {
   storeTokens(result: LoginResultDTO | RefreshTokenResultDTO): void {
     if (result as LoginResultDTO) {
       localStorage.setItem(
-        LOCALSTORAGE_ITEMS.firstName,
-        (result as LoginResultDTO).user.firstName
+        LOCALSTORAGE_ITEMS.user_firstName,
+        (result as LoginResultDTO).user.user_firstName
       );
       localStorage.setItem(
-        LOCALSTORAGE_ITEMS.lastName,
-        (result as LoginResultDTO).user.lastName
+        LOCALSTORAGE_ITEMS.user_lastName,
+        (result as LoginResultDTO).user.user_lastName
       );
     }
     localStorage.setItem(LOCALSTORAGE_ITEMS.access_token, result.access_token);
@@ -48,7 +48,7 @@ export class StorageService {
   }
 
   clearTokens(): void {
-    localStorage.removeItem(LOCALSTORAGE_ITEMS.username);
+    localStorage.removeItem(LOCALSTORAGE_ITEMS.user_firstName);
     localStorage.removeItem(LOCALSTORAGE_ITEMS.access_token);
     localStorage.removeItem(LOCALSTORAGE_ITEMS.accessTokenPeriod);
     localStorage.removeItem(LOCALSTORAGE_ITEMS.accessTokenStoreTime);
@@ -59,10 +59,10 @@ export class StorageService {
   }
 
   getUserfirstName(): string | null {
-    return localStorage.getItem(LOCALSTORAGE_ITEMS.firstName);
+    return localStorage.getItem(LOCALSTORAGE_ITEMS.user_firstName);
   }
   getUserLastName(): string | null {
-    return localStorage.getItem(LOCALSTORAGE_ITEMS.lastName);
+    return localStorage.getItem(LOCALSTORAGE_ITEMS.user_lastName);
   }
 
   getAccessToken(): string | null {

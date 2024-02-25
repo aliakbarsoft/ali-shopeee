@@ -21,10 +21,10 @@ routes.get(
 
 // /forget/:email
 routes.get(
-  "/account/forget/:email",
+  "/account/forget/:user_email",
   asyncHandler(async function forgetPsssword(req: Request, res: Response) {
-    const email = req.params.email;
-    const data = await UserService.sendFrogetPasswordToken(email);
+    const user_email = req.params.user_email;
+    const data = await UserService.sendFrogetPasswordToken(user_email);
     return res.json(data);
   })
 );

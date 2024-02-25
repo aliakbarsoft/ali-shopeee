@@ -1,13 +1,13 @@
-import { Model, Optional, DataTypes } from "sequelize";
-import db from "./_instance";
+import { Model, Optional } from "sequelize";
 
+ 
 export interface UserAttributes {
-  id: string;
-  firstName: string;
-  lastName: string;
-  nickName: string;
-  email: string;
-  password?: string;
+  user_id: number;
+  user_email: string;
+  user_password: string;
+  user_confirmPassword: string;
+  user_firstName: string;
+  user_lastName: string;
   phoneNumber: string;
   isActive?: boolean | null;
   tokenVerify?: string | null;
@@ -23,7 +23,7 @@ export interface UserAttributes {
   language_Id?: number;
   country_Id?: number;
 }
-interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
+interface UserCreationAttributes extends Optional<UserAttributes, "user_id"> {}
 
 export interface UserInstance
   extends Model<UserAttributes, UserCreationAttributes>,

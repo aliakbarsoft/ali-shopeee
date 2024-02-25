@@ -10,14 +10,14 @@
           <input
             type="email"
             nbInput
-            formControlName="email"
+            formControlName="user_email"
             fullWidth
             id="email"
           />
-          <ng-container *ngIf="loginForm.controls.email.touched">
+          <ng-container *ngIf="loginForm.controls.user_email.touched">
             <p
               class="caption status-danger"
-              *ngIf="loginForm.controls.email.errors?.required"
+              *ngIf="loginForm.controls.user_email.errors?.required"
             >
               لطفا ایمیل خود را وارد کنید
             </p>
@@ -27,7 +27,7 @@
           <label for="password" class="label"> رمزعبور </label>
           <input
             fullWidth
-            formControlName="password"
+            formControlName="user_password"
             [type]="getInputType()"
             nbInput
           />
@@ -47,10 +47,10 @@
             >
             </nb-icon>
           </button>
-          <ng-container *ngIf="loginForm.controls.password.touched">
+          <ng-container *ngIf="loginForm.controls.user_password.touched">
             <p
               class="caption status-danger"
-              *ngIf="loginForm.controls.password.errors?.required"
+              *ngIf="loginForm.controls.user_password.errors?.required"
             >
               تکرار رمز عبور الزامی میباشد
             </p>

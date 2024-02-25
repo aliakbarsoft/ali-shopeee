@@ -63,7 +63,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     const firstName = this.storageService.getUserfirstName();
     const lastName = this.storageService.getUserLastName();
-
     if (firstName && lastName) {
       this.getUser = `${firstName + " " + lastName} خوش آمدید `;
     }
