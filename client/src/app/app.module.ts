@@ -31,6 +31,7 @@ import { ProfileLayoutComponent } from './modules/profile/profile-layout/profile
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { JalaliMomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "./shared/data/jalali-picker";
 import { JALALI_MOMENT_FORMATS, MOMENT_FORMATS } from "./shared/data/jalali-format";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -39,6 +40,8 @@ import { JALALI_MOMENT_FORMATS, MOMENT_FORMATS } from "./shared/data/jalali-form
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

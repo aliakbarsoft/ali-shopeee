@@ -9,7 +9,7 @@ import { IProducts } from "../interfaces/product.interface";
   providedIn: "root",
 })
 export class UploaderService {
-  constructor(private http: HttpClient, private toastService: ToastrService) {}
+  constructor(private http: HttpClient, private toastService: ToastrService) { }
 
   uploadImage(file: File) {
     const fileToUpload = file[0] as File;
@@ -18,19 +18,31 @@ export class UploaderService {
     return this.http.post(`${environment.apiEndPoint}/uploadImage`, formData);
   }
 
-  addProducts(product: IProducts):Observable<IProducts> {
+  addProducts(product: IProducts): Observable<IProducts> {
     if (!product) {
       this.toastService.error("No category selected!");
       console.error("No category selected");
       return;
     }
-    debugger  
-
-    const payload = {...product};
-    this.http.post(environment.apiEndPoint + "/" + "product", payload).subscribe((res)=>{
+    debugger
+    var parts = product.product_img.split("\\");
+    var fileNameWithExtension = parts[parts.length - 1];
+    // var fileNameParts = fileNameWithExtension.split(".");
+    // var fileName = fileNameParts[0];
+    // Get the extension part
+    const payload = {
+      product_name: product.product_name,
+      product_img: fileNameWithExtension,
+      product_long_desc: product.product_long_desc,
+      product_price: product.product_price,
+      product_short_desc: product.product_short_desc,
+      product_weight: product.product_weight,
+      product_cart_description: product.product_cart_description
+    };
+    this.http.post(environment.apiEndPoint + "/" + "product", payload).subscribe((res) => {
       this.toastService.success('محصول شما با موفقیت ثبت شد')
     });
   }
 
-  createProducts(formData: any) {}
+  createProducts(formData: any) { }
 }

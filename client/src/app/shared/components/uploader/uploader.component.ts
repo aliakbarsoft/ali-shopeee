@@ -101,19 +101,12 @@ export class UploaderComponent {
 
   submit(formData: IProducts) {
     debugger;
-    var parts = formData.product_img.split("\\");
-    var fileNameWithExtension = parts[parts.length - 1];
-    var fileNameParts = fileNameWithExtension.split(".");
-    var fileName = fileNameParts[0];
-    // Get the extension part
-    var fileExtension = fileNameParts[1];
-    console.log("File name:", fileName);
-    console.log("File extension:", fileExtension);
+   
     // let [val1] = formData.product_img.split('/')[1].split('/')
     if (!formData) {
       this.toastService.error("Not added!");
     } else {
-      // this.uploadService.addProducts(formData);
+      this.uploadService.addProducts(formData);
     }
   }
 }

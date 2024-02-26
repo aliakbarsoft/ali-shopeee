@@ -34,6 +34,7 @@ export class ProductsComponent implements OnInit{
    this.producService.getProduct().subscribe((res:IProducts[])=>{
     res.forEach(product => {
       product.product_imgShow = `${environment.urlProductPic}${product.product_img}`
+      debugger;
     });
     this.dataProduct = res
    })
