@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap");
 
-
-
 img {
   max-width: 100%;
 }
@@ -11,6 +9,7 @@ img {
   grid-template-columns: auto auto auto auto;
   padding: 10px;
   width: 100%;
+  max-width: 100%;
 }
 
 .card {
@@ -20,7 +19,7 @@ img {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 50px 0 rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   overflow: hidden;
-    position: relative;
+  position: relative;
   transition: 0.15s ease-in;
 
   &:hover,
@@ -33,30 +32,21 @@ img {
 .card-image {
   border-radius: 10px;
   overflow: hidden;
+  max-height: 15rem;
+  min-height: 12rem;
+  max-width: 22rem;
+  padding: 5px;
+  img{
+    border-radius: 10px;
+  }
 }
 
 .card-header {
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    font-weight: 600;
-    font-size: 1.375rem;
-    line-height: 1.25;
-    padding-right: 1rem;
-    text-decoration: none;
-    color: inherit;
-    will-change: transform;
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-    }
-  }
+  padding: 0.75rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+ 
 }
 
 .icon-button {

@@ -11,6 +11,12 @@ import { IProducts } from "../../interfaces/product.interface";
 import { UploaderService } from "../../services/uploader.service";
 import { ICategories } from "../../interfaces/uploader.interface";
 import * as jalaliMoment from "jalali-moment";
+import { DomSanitizer } from "@angular/platform-browser";
+import { ImageCroppedEvent, LoadedImage } from "ngx-image-cropper";
+import { NbDialogRef, NbDialogService } from "@nebular/theme";
+import { ImgCropperComponent } from "../img-cropper/img-cropper.component";
+import { ShowcaseDialogComponent } from "../../../profile/modal-overlays/dialog/showcase-dialog/showcase-dialog.component";
+
 
 @Component({
   selector: "ali-uploader",
@@ -30,12 +36,16 @@ export class UploaderComponent {
   file: File | null = null;
   imageUrl = "";
   fileToUpload;
-
+  priceValue = 0.
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
 
   constructor(
     private uploadService: UploaderService,
-    private toastService: ToastrService
-  ) { }
+    private toastService: ToastrService,
+    private dialogService: NbDialogService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -72,6 +82,7 @@ export class UploaderComponent {
   }
 
   onUpload() {
+    debugger;
     if (this.file) {
       // const formData: FormData = new FormData();
       // const fileToUpload = this.file[0] as File;
@@ -99,9 +110,47 @@ export class UploaderComponent {
     }
   }
 
+
+
+  openUploadImg(){
+    this.dialogService.open(ImgCropperComponent, {
+      context: {
+        title: 'This is a title passed to the dialog component',
+      },
+    });
+  }
+
+
+  profileImage = '';
+  imageToCrop: File;
+
+  handleFileClick(file: HTMLInputElement): void {
+    file.click(); // trigger input file
+  }
+
+  fileChangeEvent(event: any): void {
+    if (event.target.files.length) {
+      this.imageToCrop = event;
+    } else {
+      this.profileImage = '';
+    }
+  }
+
+  onCrop(image: File) {
+    if (image) {
+      console.log('cropped image ready for upload:', image);
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.profileImage = e.target.result;
+      };
+      reader.readAsDataURL(image);
+    } else {
+      this.profileImage = '';
+    }
+  }
   submit(formData: IProducts) {
     debugger;
-   
+
     // let [val1] = formData.product_img.split('/')[1].split('/')
     if (!formData) {
       this.toastService.error("Not added!");
@@ -109,4 +158,7 @@ export class UploaderComponent {
       this.uploadService.addProducts(formData);
     }
   }
+
+
+
 }

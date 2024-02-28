@@ -1,18 +1,16 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IRegister } from "../../modules/authentication/interfaces/register.dto";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Router } from "@angular/router";
 import { tap } from "rxjs/operators";
-import { Ability, AbilityBuilder, createMongoAbility } from "@casl/ability";
+import { IRegister } from "../../modules/authentication/interfaces/register.dto";
 
+import { environment } from "../../../environments/environment";
 import {
   LoginDTO,
   LoginResultDTO,
   UserDTO,
 } from "../../modules/authentication/interfaces/user";
 import { StorageService } from "../clinet-service/storage.service";
-import { environment } from "../../../environments/environment";
 import { tokenRemainingTime } from "../global-variable/token-time-variable";
 import { NumberUtility } from "../utilities/number.utilities";
 

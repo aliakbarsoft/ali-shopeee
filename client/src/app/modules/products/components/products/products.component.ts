@@ -4,6 +4,7 @@ import { ProductsDTO } from '../../models/products';
 import { ProductService } from '../../services/product.service';
 import { environment } from '../../../../../environments/environment';
 import * as moment from 'moment';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ali-products',
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit{
   sizes = [5, 6.5, 8, 10, 5, 6];
   defualtSize = 5;
   dataProduct:IProducts[];
-
+  product_create_date:Date
   public env = environment
   jalaliDate: string;
   
@@ -25,7 +26,8 @@ export class ProductsComponent implements OnInit{
   quantities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   defualtQuantity = 1
 
-  constructor(private producService:ProductService) {
+  constructor(private producService:ProductService,
+    private datePipe: DatePipe) {
     const gregorianDate = moment('2024-02-24', 'YYYY-MM-DD');
     this.jalaliDate = gregorianDate.format('jYYYY/jMM/jDD');
   }
@@ -34,7 +36,6 @@ export class ProductsComponent implements OnInit{
    this.producService.getProduct().subscribe((res:IProducts[])=>{
     res.forEach(product => {
       product.product_imgShow = `${environment.urlProductPic}${product.product_img}`
-      debugger;
     });
     this.dataProduct = res
    })
@@ -54,5 +55,10 @@ export class ProductsComponent implements OnInit{
   createProduct(product:ProductsDTO) {
     console.log(product);
 
+  }
+
+  formatDate(date: Date): string {
+    // Use DatePipe to format the date for display
+    return this.datePipe.transform(date, 'short');
   }
 }

@@ -12,6 +12,7 @@ export class UploaderService {
   constructor(private http: HttpClient, private toastService: ToastrService) { }
 
   uploadImage(file: File) {
+    debugger;
     const fileToUpload = file[0] as File;
     const formData = new FormData();
     formData.append("file", fileToUpload, fileToUpload.name);

@@ -71,6 +71,7 @@ const MODULES = [
   NbInputModule,
   NbSelectModule,
   NbTooltipModule,
+  
 ];
 
 const SERVICES = [

@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import multer from "multer";
-import path from "path";
-import routes from "../../routes/public";
 import asyncHandler from "../../helper/asyncHandler";
+import routes from "../../routes/public";
 import UploaderService from "./service";
 
 const storage = multer.diskStorage({
